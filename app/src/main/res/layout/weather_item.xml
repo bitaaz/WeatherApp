@@ -16,6 +16,7 @@
         <TextView
             android:id="@+id/location"
             android:text="Location"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -23,6 +24,7 @@
         <TextView
             android:layout_weight="90"
             android:text="18"
+            android:textColor="@color/white"
             android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
