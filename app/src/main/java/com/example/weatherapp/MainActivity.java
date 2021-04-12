@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.weatherapp.adapter.OnWeatherItemListener;
 import com.example.weatherapp.adapter.WeatherRecyclerViewAdapter;
 import com.example.weatherapp.model.WeatherModel;
 import com.example.weatherapp.viewmodel.WeatherViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements OnWeatherItemList
 
     private List<WeatherModel> weatherModels;
 
+    private FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +50,22 @@ public class MainActivity extends AppCompatActivity implements OnWeatherItemList
 
         weatherViewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
 
+        floatingActionButton = findViewById(R.id.searchButton);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, SearchWeatherActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
 
         observer();
         configureRecyclerView();
         weatherApi("Tehran");
+
 
 
 
@@ -141,5 +157,17 @@ public class MainActivity extends AppCompatActivity implements OnWeatherItemList
 
 
 
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                Log.v("Tag","Searched: " + data.getStringExtra("searched"));
+
+                weatherApi(data.getStringExtra("searched"));
+
+            }
+        }
     }
 }
