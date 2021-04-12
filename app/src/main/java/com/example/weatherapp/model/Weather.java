@@ -9,7 +9,23 @@ public class Weather {
     @Expose
     private String icon;
 
+    @SerializedName("main")
+    @Expose
+    private String main;
+
+    @SerializedName("description")
+    @Expose
+    private String description;
+
     public String getIcon() {
         return icon;
+    }
+
+    public String getMain() {
+        return main;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
