@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WeatherDetailsActivity"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#22B3F4">
+
+
+    <TextView
+        android:id="@+id/cityName"
+        android:text="City"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:weightSum="100"
+        android:layout_marginBottom="100dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/weatherDetailImage"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_weight="30"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+
+        <TextView
+            android:id="@+id/weatherDetailTemp"
+            android:text="18"
+            android:layout_weight="70"
+            android:layout_gravity="center_vertical"
+            android:textSize="36sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/highTemp"
+        android:src="@drawable/ic_launcher_background"
+        android:text="High: 28"
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/lowTemp"
+        android:text="Low: 18"
+        android:padding="5dp"
+        android:textSize="19sp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/wind"
+        android:padding="5dp"
+        android:text="Wind: "
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/condition"
+        android:padding="5dp"
+        android:text="Condition: "
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/pressure"
+        android:padding="5dp"
+        android:text="Pressure: "
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/humidity"
+        android:padding="5dp"
+        android:text="Humidity: "
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/sunrise"
+        android:text="Sunrise: "
+        android:padding="5dp"
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/sunset"
+        android:padding="5dp"
+        android:text="Sunset: "
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/lastUpdate"
+        android:padding="5dp"
+        android:text="Last Updated: "
+        android:layout_gravity="center"
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
