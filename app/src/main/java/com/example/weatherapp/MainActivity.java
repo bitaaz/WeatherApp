@@ -7,25 +7,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.weatherapp.adapter.OnWeatherItemListener;
 import com.example.weatherapp.adapter.WeatherRecyclerViewAdapter;
+import com.example.weatherapp.data.SharedPreferencesCities;
 import com.example.weatherapp.model.WeatherModel;
 import com.example.weatherapp.viewmodel.WeatherViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements OnWeatherItemListener {
 
@@ -39,10 +38,14 @@ public class MainActivity extends AppCompatActivity implements OnWeatherItemList
 
     private FloatingActionButton floatingActionButton;
 
+    private SharedPreferencesCities sharedPreferencesCities;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferencesCities = new SharedPreferencesCities(this);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -64,7 +67,20 @@ public class MainActivity extends AppCompatActivity implements OnWeatherItemList
 
         observer();
         configureRecyclerView();
-        weatherApi("Tehran");
+
+        if (sharedPreferencesCities.getWeather() == null){
+
+            weatherApi("Tehran");
+
+       }
+        else {
+
+            weatherModels = sharedPreferencesCities.getWeather();
+
+            adapter.setWeathers(weatherModels);
+
+
+        }
 
 
 
@@ -82,12 +98,22 @@ public class MainActivity extends AppCompatActivity implements OnWeatherItemList
 
                 if (weatherModel != null){
 
-                    Log.v("Tag", "name: " + weatherModel.getName());
+//                    Log.v("Tag", "name: " + weatherModel.getName());
+
+                    for (int i = 0; i < weatherModels.size(); i++){
+
+                        //not to save and show duplicate cities
+                        if (weatherModel.getName().equals(weatherModels.get(i).getName())){
+                            adapter.setWeathers(weatherModels);
+                            return;
+
+                        }
+                    }
+
                     weatherModels.add(weatherModel);
                     adapter.setWeathers(weatherModels);
-
-
-                    Log.v("Tag", "count: " + adapter.getItemCount());
+                    sharedPreferencesCities.saveWeather(weatherModels);
+//                    Log.v("Tag", "count: " + adapter.getItemCount());
 
                 }
 
@@ -166,6 +192,7 @@ public class MainActivity extends AppCompatActivity implements OnWeatherItemList
                 Log.v("Tag","Searched: " + data.getStringExtra("searched"));
 
                 weatherApi(data.getStringExtra("searched"));
+
 
             }
         }
